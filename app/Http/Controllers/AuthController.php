@@ -10,36 +10,6 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Menampilkan halaman pendaftaran
-    public function daftar()
-    {
-        $roles = Role::all(); // Mengambil semua role dari database
-        return view('sign-up'); // Mengirim data role ke view
-    }
-    // Menyimpan data pendaftaran
-    public function submit(Request $request)
-    {
-      
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email', // Validasi email
-            'username' => 'required|string|unique:users,username',
-            'password' => 'required|string|min:6|confirmed',
-            'role_id' => 'required|exists:roles,id',
-        ]);
-        
-    
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email, // Pastikan email ada
-            'username' => $request->username,
-            'password' => Hash::make($request->password), 
-            'role_id' => Role::where('name', 'staff gudang')->first()->id,
-        ]);
-        return redirect()->route('login.tampil')->with('success', 'Registrasi berhasil! Silakan login.');
-    }
-    
-
     // Menampilkan halaman login
     public function login()
     {

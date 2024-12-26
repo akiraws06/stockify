@@ -24,9 +24,6 @@ Route::get('/', function () {
     return view('sign-in', ['title' => 'Login']);
 })->name('index');
 
-//Registration
-Route::get('/sign-up', [AuthController::class, 'daftar'])->name('tampil');
-Route::post('/sign-up/submit', [AuthController::class, 'submit'])->name('submit');
 
 //Login
 Route::get('/sign-in', [AuthController::class, 'login'])->name('login.tampil');
