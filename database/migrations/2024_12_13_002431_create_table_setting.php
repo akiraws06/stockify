@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('setting', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo')->default('logo.png');
+            $table->string('logo')->default('image/setting/logo.png');
             $table->timestamps();
         });
     }

@@ -19,12 +19,13 @@ class AuthController extends Controller
     // Menyimpan data pendaftaran
     public function submit(Request $request)
     {
-        
+      
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email', // Validasi email
             'username' => 'required|string|unique:users,username',
             'password' => 'required|string|min:6|confirmed',
+            'role_id' => 'required|exists:roles,id',
         ]);
         
     
@@ -33,8 +34,8 @@ class AuthController extends Controller
             'email' => $request->email, // Pastikan email ada
             'username' => $request->username,
             'password' => Hash::make($request->password), 
+            'role_id' => Role::where('name', 'staff gudang')->first()->id,
         ]);
-    
         return redirect()->route('login.tampil')->with('success', 'Registrasi berhasil! Silakan login.');
     }
     

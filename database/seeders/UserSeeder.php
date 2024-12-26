@@ -14,23 +14,34 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {  
-        User::create([
-            "name" => "Admin",
-            "username" => "admin",
-            "role_id" => 1,
-            "password" => bcrypt('123456')
-        ]);
-        User::create([
-            "name" => "Manager Gudang",
-            "username" => "manager",
-            "role_id" => 2,
-            "password" => bcrypt('123456')
-        ]);
-        User::create([
-            "name" => "Staff Gudang",
-            "username" => "staff",
-            "role_id" => 3,
-            "password" => bcrypt('123456')
-        ]);
+        // Menggunakan array untuk menyimpan data pengguna
+        $users = [
+            [
+                "name" => "Admin",
+                "username" => "admin",
+                "email" => "admin@coba.com",
+                "role_id" => 1,
+                "password" => bcrypt('123456')
+            ],
+            [
+                "name" => "Manager Gudang",
+                "username" => "manager",
+                "email" => "manager@coba.com",
+                "role_id" => 2,
+                "password" => bcrypt('123456')
+            ],
+            [
+                "name" => "Staff Gudang",
+                "username" => "staff",
+                "email" => "staff@coba.com",
+                "role_id" => 3,
+                "password" => bcrypt('123456')
+            ]
+        ];
+
+        // Loop untuk membuat pengguna
+        foreach ($users as $user) {
+            User::create($user);
+        }
     }
 }

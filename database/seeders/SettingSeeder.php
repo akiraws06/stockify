@@ -20,5 +20,5 @@ class SettingSeeder extends Seeder
             ],
             // Tambahkan lebih banyak data jika diperlukan
         ]);
-}
+    }
 }

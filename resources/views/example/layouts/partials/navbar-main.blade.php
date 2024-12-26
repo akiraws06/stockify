@@ -3,8 +3,8 @@
     <div class="flex items-center justify-between">
       <div class="flex items-center justify-start">
         <a href="{{ url('/') }}" class="flex mr-4">
-          <img src="{{ asset('static/images/logo.svg')}}" class="h-8 mr-3" alt="Flowbite Logo" />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+          <img src="{{ asset('storage/'.$setting->logo) }}" class="h-8 mr-3" alt="Flowbite Logo" />
+          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">{{$setting->name}}</span>
         </a>
         <div class="hidden sm:flex sm:ml-6">
           <ul class="flex space-x-8">
