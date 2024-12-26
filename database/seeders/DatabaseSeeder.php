@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             SuppliersTableSeeder::class,
             CategoriesTableSeeder::class,
             ProductsTableSeeder::class,
-            SettingsSeeder::class,
+            SettingSeeder::class,
 
 
             // ... seeder lainnya
