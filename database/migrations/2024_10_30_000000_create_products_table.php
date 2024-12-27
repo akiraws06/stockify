@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('selling_price', 10, 2);
             $table->integer('stock');
             $table->integer('stock_min');
-            $table->string('image')->default('images/product/product.png');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
