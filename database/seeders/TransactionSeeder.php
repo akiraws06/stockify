@@ -20,7 +20,7 @@ class TransactionSeeder extends Seeder
                 'date' => now(),
                 'status' => 'Pending',
                 'notes' => null,
-                'stockSementara' => '0',
+                
             ],
             [
                 'product_id' => '1', 
@@ -30,7 +30,7 @@ class TransactionSeeder extends Seeder
                 'date' => now(),
                 'status' => 'Pending',
                 'notes' => null,
-                'stockSementara' => '0',
+                
             ],
         ];
         
