@@ -2,7 +2,7 @@
 @section('content')
 <div class="flex flex-col items-center justify-center px-6 pt-8 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
     <a href="{{ url('/')}}" class="flex items-center justify-center mb-8 text-2xl font-semibold lg:mb-10 dark:text-white">
-        <img src="{{ asset('storage/'.$setting->logo) }}" class="mr-4 h-11" alt="FlowBite Logo">
+        <img src="{{ asset('storage/'.$setting->logo) }}" class="mr-4 h-11" alt="Stockify">
         <span>{{$setting->name}}</span>
     </a>
     <!-- Card -->
