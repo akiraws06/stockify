@@ -17,7 +17,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Meja',
                 'sku' => 'MJ123',
-                'desc' => 'Dari kayu.',
+                'description' => 'Dari kayu.',
                 'purchase_price' => '50000',
                 'selling_price' => '60000',
                 'category_id' => '2',
@@ -30,7 +30,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Buku',
                 'sku' => 'BK123',
-                'desc' => 'buat nulis.',
+                'description' => 'buat nulis.',
                 'purchase_price' => '12000',
                 'selling_price' => '15000',
                 'category_id' => '3',
@@ -43,7 +43,7 @@ class ProductsTableSeeder extends Seeder
             [
                 'name' => 'Earphone',
                 'sku' => 'EP123',
-                'desc' => 'Alat untuk mendengarkan musik.',
+                'description' => 'Alat untuk mendengarkan musik.',
                 'purchase_price' => '75000',
                 'selling_price' => '80000',
                 'category_id' => '1',
@@ -59,10 +59,9 @@ class ProductsTableSeeder extends Seeder
             $createdProduct = Product::create([
                 'name' => $productData['name'],
                 'sku' => $productData['sku'],
-                'desc' => $productData['desc'],
+                'description' => $productData['description'],
                 'purchase_price' => $productData['purchase_price'],
                 'selling_price' => $productData['selling_price'],
-                'image' => null, // Kosongkan untuk menggunakan nilai default
                 'category_id' => $productData['category_id'],
                 'supplier_id' => $productData['supplier_id'],
                 'stock' => $productData['stock'],

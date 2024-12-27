@@ -12,12 +12,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('sku')->unique();
-            $table->text('desc')->nullable();
+            $table->text('description')->nullable();
             $table->decimal('purchase_price', 10, 2);
             $table->decimal('selling_price', 10, 2);
             $table->integer('stock');
             $table->integer('stock_min');
-            $table->string('image')->nullable();
+            $table->string('image')->default('images/product/product.png');
             $table->timestamps();
         });
     }
