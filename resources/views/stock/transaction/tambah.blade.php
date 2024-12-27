@@ -33,9 +33,7 @@
                             
                             <select name="user_id" id="position" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                                 <option value="" disabled selected>Pilih User</option>
-                                @foreach ($us as $us)
-                                <option value="{{ $us->id }}">{{ $us->name }}</option>
-                                @endforeach
+                                <option value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option>
                             </select>
                         </div>
 
@@ -73,7 +71,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
-                    <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Add user</button>
+                    <button class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" type="submit">Tambah Transaksi</button>
                 </div>
             </form>
         </div>
