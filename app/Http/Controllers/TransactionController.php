@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\UserActivity;
+    use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB; // Perbarui import ini
 
 
