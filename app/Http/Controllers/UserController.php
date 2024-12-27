@@ -15,7 +15,7 @@ class UserController extends Controller
     // Display the user list
     public function tampil()
     {
-        $users = User::with('role')->get(); // Mengambil semua pengguna beserta role mereka
+        $users = User::with('role')->orderBy('created_at', 'desc')->paginate(10);
         $roles = Role::all(); // Mengambil semua role dari database
         return view('user.tampil', compact('users', 'roles')); // Mengirimkan data pengguna dan role ke view
     }
