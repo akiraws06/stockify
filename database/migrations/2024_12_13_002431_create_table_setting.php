@@ -11,23 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
-        $defaultPath = 'public/images/setting';
-        $defaultFile = $defaultPath . '/logo.png';
-
-        if (!Storage::exists($defaultPath)) {
-            Storage::makeDirectory($defaultPath);
-        }
-
-        // Pastikan file default tersedia
-        if (!Storage::exists($defaultFile)) {
-            Storage::put($defaultFile, file_get_contents(public_path('images/setting/logo.png')));
-        }
-
         Schema::create('setting', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo')->default('logo.png');
+            $table->string('logo')->default('images/setting/logo.png');
             $table->timestamps();
         });
     }
