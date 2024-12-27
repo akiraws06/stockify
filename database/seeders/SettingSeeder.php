@@ -15,6 +15,7 @@ class SettingSeeder extends Seeder
         DB::table('setting')->insert([
             [
                 'name' => 'Stockify',
+                'logo' => 'images/settings/logo.png',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

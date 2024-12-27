@@ -11,6 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+        $defaultPath = 'public/images/profile';
+        $defaultFile = $defaultPath . '/default.png';
+
+        if (!Storage::exists($defaultPath)) {
+            Storage::makeDirectory($defaultPath);
+        }
+
+        // Pastikan file default tersedia
+        if (!Storage::exists($defaultFile)) {
+            Storage::put($defaultFile, file_get_contents(public_path('images/profile/default.png')));
+        }
             Schema::create('users', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
