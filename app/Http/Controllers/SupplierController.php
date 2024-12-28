@@ -84,14 +84,21 @@ class SupplierController extends Controller
     }
 
     public function delete($id)
-    {
-        
-        UserActivity::create([
-            'user_id' => Auth::id(),
-            'activity' => 'User telah melakukan menghapus data supplier ', 
-        ]);
-        $supplier = Supplier::findOrFail($id);
-        $supplier->delete();
-        return redirect()->route('supplier.tampil')->with('success', 'Supplier berhasil dihapus');
-    }
+{
+    // Find the supplier by ID, or fail if not found
+    $supplier = Supplier::findOrFail($id);
+
+    // Log the activity with the supplier's name
+    UserActivity::create([
+        'user_id' => Auth::id(),
+        'activity' => 'User telah melakukan menghapus data supplier: ' . $supplier->name,
+    ]);
+
+    // Delete the supplier
+    $supplier->delete();
+
+    // Redirect back to the supplier listing page with a success message
+    return redirect()->route('supplier.tampil')->with('success', 'Supplier berhasil dihapus');
+}
+
 }
