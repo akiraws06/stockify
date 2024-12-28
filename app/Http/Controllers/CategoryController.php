@@ -74,6 +74,10 @@ class CategoryController extends Controller
     }
 
     function delete($id){
+        UserActivity::create([
+            'user_id' => Auth::id(),
+            'activity' => 'User telah melakukan menghapus data supplier ', 
+        ]);
         $categories = Category::find($id);
         $categories -> delete();
         return 

@@ -85,6 +85,11 @@ class SupplierController extends Controller
 
     public function delete($id)
     {
+        
+        UserActivity::create([
+            'user_id' => Auth::id(),
+            'activity' => 'User telah melakukan menghapus data supplier ', 
+        ]);
         $supplier = Supplier::findOrFail($id);
         $supplier->delete();
         return redirect()->route('supplier.tampil')->with('success', 'Supplier berhasil dihapus');
