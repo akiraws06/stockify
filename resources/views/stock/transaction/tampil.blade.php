@@ -157,8 +157,8 @@
                                 <div class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ $transaction->type }}</div>
                             </td>
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white transaction-quantity">{{ $transaction->quantity }}</td>
-                            <td class="p-4 text-sm font-normal text-left text-gray-500 uppercase dark:text-gray-400 transaction-date">{{ $transaction->updated_at->format('Y-m-d') }}</td>
                             <td class="p-4 text-sm font-normal text-left text-gray-500 uppercase dark:text-gray-400 transaction-time">{{ $transaction->updated_at->format('H:i:s') }}</td>
+                            <td class="p-4 text-sm font-normal text-left text-gray-500 uppercase dark:text-gray-400 transaction-date">{{ $transaction->updated_at->format('Y-m-d') }}</td>
 
                             <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white transaction-status">
                             @if (auth()->user()->role->name === 'Staff Gudang')

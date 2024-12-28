@@ -28,6 +28,7 @@ class DashboardController extends Controller
                 'transactions.date',
                 'transactions.notes',
                 'transactions.updated_at',
+                'transactions.created_at',
                 'products.name AS product_name', // Ambil nama produk dari tabel products
                 'products.stock AS min_stock',
                 'products.sku AS product_sku',
@@ -69,12 +70,17 @@ class DashboardController extends Controller
         $prod = Product::all();
         $category = Category::all();
         $stockOpname = StockOpname::paginate(10);
+        
+        $todayTransactions = $allTransactions->filter(function ($allTransactions) {
+            return \Carbon\Carbon::parse($allTransactions->created_at)->isToday();
+        });
+        
 
 
         
     
         // Return ke view
-    return view('dashboard.tampil', compact('transactions', 'prod', 'us', 'type', 'status', 'category', 'stockOpname','allTransactions'));
+    return view('dashboard.tampil', compact('transactions', 'prod', 'us', 'type', 'status', 'category', 'stockOpname','allTransactions','todayTransactions'));
 
         }
 }

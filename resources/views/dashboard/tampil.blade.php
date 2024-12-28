@@ -47,9 +47,7 @@
                     </tr>
                   </thead>
                   <tbody class="bg-white dark:bg-gray-800">
-                    @foreach($transactions->filter(function($transaction) {
-                        return isset($transaction->created_at) && \Carbon\Carbon::parse($transaction->created_at)->isToday();
-                    }) as $transaction)
+                  @foreach($todayTransactions as $transaction)
                     <tr>
                       <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
                         {{$transaction->product_name}} 
