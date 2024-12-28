@@ -80,7 +80,7 @@ class ProductController extends Controller
             'masuk' => 0, // Atur sesuai kebutuhan
             'keluar' => 0, // Atur sesuai kebutuhan
             'stock_akhir' => $product->stock, // Atur sesuai kebutuhan
-            'date' => now(), // Atur tanggal sesuai kebutuhan
+            'tanggal' => now(), // Atur tanggal sesuai kebutuhan
         ]);
 
         return redirect()->route('product.tampil')->with('success', 'Product created successfully.'); 
