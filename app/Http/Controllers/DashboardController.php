@@ -71,8 +71,9 @@ class DashboardController extends Controller
         $category = Category::all();
         $stockOpname = StockOpname::paginate(10);
         
-        $todayTransactions = $allTransactions->filter(function ($allTransactions) {
-            return \Carbon\Carbon::parse($allTransactions->created_at)->isToday();
+        $todayTransactions = $allTransactions->filter(function ($transaction) {
+            return \Carbon\Carbon::parse($transaction->created_at)->isToday() && 
+                   in_array($transaction->status, ['Dikeluarkan', 'Diterima']);
         });
         
 
