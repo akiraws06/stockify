@@ -12,7 +12,7 @@ class SupplierController extends Controller
 {
     public function tampil()
     {
-        $supplier = Supplier::paginate(2);
+        $supplier = Supplier::paginate(20);
         return view('supplier.tampil', compact('supplier'));
     }
 
