@@ -73,24 +73,18 @@ class CategoryController extends Controller
         return redirect()->route('product.category.tampil');
     }
 
-    public function delete($id)
-{
-    // Find the category by ID
-    $categories = Category::find($id);
-
-    if ($categories) {
-        // Log the activity with the category name
+    function delete($id){
         UserActivity::create([
             'user_id' => Auth::id(),
-            'activity' => 'User telah melakukan menghapus data category: ' . $categories->name, 
+            'activity' => 'User telah melakukan menghapus data category ', 
         ]);
-
-        // Delete the category
-        $categories->delete();
+        $categories = Category::find($id);
+        $categories -> delete();
+        UserActivity::create([
+            'user_id' => Auth::id(),
+            'activity' => 'User telah menghapus data category '. strtolower($categories->name),
+        ]);
+        return 
+        redirect()->route('product.category.tampil');
     }
-
-    // Redirect back to the category display page
-    return redirect()->route('product.category.tampil');
 }
-
-    }

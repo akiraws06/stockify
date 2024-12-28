@@ -156,27 +156,15 @@ class ProductController extends Controller
         return redirect()->route('product.tampil'); 
     }
 
-    public function delete($id)
-    {
-        // Find the product by ID
+    function delete($id){
         $product = Product::find($id);
-    
-        // Check if the product exists
-        if ($product) {
-            // Log the activity with the product's name
-            UserActivity::create([
-                'user_id' => Auth::id(),
-                'activity' => 'User telah melakukan menghapus data product: ' . $product->name,
-            ]);
-    
-            // Delete the product
-            $product->delete();
-        }
-    
-        // Redirect back to the product listing page
-        return redirect()->route('product.tampil')->with('success', 'Product berhasil dihapus');
+        $product -> delete();
+        UserActivity::create([
+            'user_id' => Auth::id(),
+            'activity' => 'User telah menghapus data product '. $product->name,
+        ]);
+        return redirect()->route('product.tampil');
     }
-    
 
     // Import Product
     public function import(Request $request)
