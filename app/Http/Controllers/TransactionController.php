@@ -7,6 +7,8 @@ use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\StockOpname;
+
 use App\Models\UserActivity;
     use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB; // Perbarui import ini
@@ -44,6 +46,16 @@ class TransactionController extends Controller
                     'notes' => 'nullable|string',
                     
                 ]);
+                $stockOpname = StockOpname::where('product_id', $request->product_id)->latest('created_at')->first();
+
+                if ($type === 'keluar') { // Validasi hanya untuk transaksi keluar
+                    if (!$stockOpname || $stockOpname->stock_akhir < $request->quantity) {
+                        // Jika stok tidak mencukupi, kembalikan dengan pesan alert biasa
+                        return redirect()->back()
+                            ->with('error', 'Jumlah transaksi keluar melebihi stok yang tersedia.')
+                            ->withInput();
+                    }
+                }
                 
 
             Transaction::create([
