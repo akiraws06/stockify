@@ -14,6 +14,11 @@
             </div>
             <!-- Modal body -->
             <div class="p-6 space-y-6">
+            @if (session('error'))
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
                 <form action="{{ route('stock.transaction.submit', ['type' => $type]) }}" method="POST">
                     @csrf
                     <div class="grid grid-cols-6 gap-6">
