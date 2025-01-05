@@ -217,22 +217,34 @@ class ProductController extends Controller
         $product = Product::all();
         return view('product.detail.tambah', compact('product'));
     }
-    public function submitAtribute(Request $request){
-        UserActivity::create([
-            'user_id' => Auth::id(),
-            'activity' => 'User telah melakukan menambahkan detail product'.$product->name
-        ]);
+    public function submitAtribute(Request $request)
+    {
+        // Validate the request data
         $request->validate([
             'product_id' => 'required|exists:products,id',
             'name' => 'required|string|max:255',
             'value' => 'required|string|max:255',
         ]);
-
+    
+        // Find the product to log activity
+        $product = Product::findOrFail($request->product_id);
+    
+        // Log user activity
+        UserActivity::create([
+            'user_id' => Auth::id(),
+            'activity' => 'User telah melakukan menambahkan detail product: ' . $product->name,
+        ]);
+    
+        // Create the product attribute
         ProductAtribute::create([
             'product_id' => $request->product_id,
             'name' => $request->name,
             'value' => $request->value,
         ]);
-        return redirect()->route('detail.tampil',['id' => $request->product_id])->with('success', 'Atribute created successfully.');
+    
+        // Redirect with success message
+        return redirect()->route('detail.tampil', ['id' => $request->product_id])
+                         ->with('success', 'Atribute created successfully.');
     }
+    
 }
