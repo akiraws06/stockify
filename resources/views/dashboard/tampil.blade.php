@@ -2,7 +2,7 @@
 @section('content')
 @section('title',"Dashboard")
 @vite(['resources/css/app.css','resources/js/app.js'])
-  @if (auth()->user()->role->name === 'Manager Gudang')
+@if (auth()->user()->role->name === 'Manager Gudang')
       <div class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800 mx-4 my-4">
           <div class="items-center justify-between lg:flex">
             <div class="mb-4 lg:mb-0">
@@ -15,125 +15,126 @@
               </span>
             </div>
           </div>
-      <!-- Table Manager Gudang Transaksi Hari Ini-->
-        <div class="flex flex-col mt-6 mx-4">
-          <div class="overflow-x-auto rounded-lg mx-4">
-            <div class="inline-block min-w-full align-middle">
-              <div class="overflow-hidden shadow sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                  <thead class="bg-gray-50 dark:bg-gray-700">
-                    <tr>
-                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                        Product Name
-                      </th>
-                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                        Category
-                      </th>
-                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                        Quantity
-                      </th>
-                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                        Current Stock
-                      </th>
-                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                        Time
-                      </th>
-                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                        Date
-                      </th>
-                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                        Status
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody class="bg-white dark:bg-gray-800">
-                  @foreach($todayTransactions as $transaction)
-                    <tr>
-                      <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$transaction->product_name}} 
-                      </td>
-                      <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$transaction->category_name}}
-                      </td>
-                      <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        @if($transaction->type == 'Masuk')
-                          + {{$transaction->quantity}}
-                        @else
-                          - {{$transaction->quantity}}
-                        @endif
-                      </td>
-                      <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$transaction->stock_sementara}}</td>
-                      <td class="p-4 text-sm font-normal text-left text-gray-500 dark:text-gray-400 transaction-date transaction-time">{{ \Carbon\Carbon::parse($transaction->updated_at)->setTimezone('Asia/Jakarta')->format('H:i:s') ?? 'Waktu Tidak Ditemukan' }}</td>
-                      <td class="p-4 text-sm font-normal text-left text-gray-500 dark:text-gray-400 transaction-date transaction-date">{{ \Carbon\Carbon::parse($transaction->updated_at)->setTimezone('Asia/Jakarta')->format('Y-m-d') ?? 'Tanggal Tidak Ditemukan' }}</td>
-                    
-                      <td class="p-4 whitespace-nowrap">
-                        <span
-                          class="{{$transaction->status == 'Ditolak'?'bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-red-100 dark:border-red-400 dark:bg-gray-700 dark:text-red-400':
-                          ($transaction->status == 'Pending'?'bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-purple-400 border border-purple-100 dark:border-purple-500':
-                          ($transaction->status == 'Dikeluarkan'?'bg-orange-100 text-orange-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-orange-400 border border-orange-100 dark:border-orange-500':
-                          'bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500')) }}">
-                          {{$transaction->status}}
-                        </span>
-                      </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
+  <!-- Table Manager Gudang Transaksi Hari Ini-->
+              <div class="flex flex-col mt-6 mx-4">
+                <div class="overflow-x-auto rounded-lg mx-4">
+                  <div class="inline-block min-w-full align-middle">
+                    <div class="overflow-hidden shadow sm:rounded-lg">
+                      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                          <tr>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Product Name
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Category
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Quantity
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Current Stock
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Time
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Date
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Status
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800">
+                        @foreach($dataToday as $transaction)
+                          <tr>
+                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                              {{$transaction->product_name}} 
+                            </td>
+                            <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                              {{$transaction->category_name}}
+                            </td>
+                            <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                              @if($transaction->type == 'Masuk')
+                                + {{$transaction->quantity}}
+                              @else
+                                - {{$transaction->quantity}}
+                              @endif
+                            </td>
+                            <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                              {{$transaction->stock_sementara}}</td>
+                            <td class="p-4 text-sm font-normal text-left text-gray-500 dark:text-gray-400 transaction-date transaction-time">{{ \Carbon\Carbon::parse($transaction->updated_at)->setTimezone('Asia/Jakarta')->format('H:i:s') ?? 'Waktu Tidak Ditemukan' }}</td>
+                            <td class="p-4 text-sm font-normal text-left text-gray-500 dark:text-gray-400 transaction-date transaction-date">{{ \Carbon\Carbon::parse($transaction->updated_at)->setTimezone('Asia/Jakarta')->format('Y-m-d') ?? 'Tanggal Tidak Ditemukan' }}</td>
+                          
+                            <td class="p-4 whitespace-nowrap">
+                              <span
+                                class="{{$transaction->status == 'Ditolak'?'bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-red-100 dark:border-red-400 dark:bg-gray-700 dark:text-red-400':
+                                ($transaction->status == 'Pending'?'bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-purple-400 border border-purple-100 dark:border-purple-500':
+                                ($transaction->status == 'Dikeluarkan'?'bg-orange-100 text-orange-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-orange-400 border border-orange-100 dark:border-orange-500':
+                                'bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-green-400 border border-green-100 dark:border-green-500')) }}">
+                                {{$transaction->status}}
+                              </span>
+                            </td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    <!-- Pagination -->
+        <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
+          <div class="flex items-center mb-4 sm:mb-0">
+              <a href="{{ $todayTransactions->previousPageUrl() }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              </a>
+              <a href="{{ $todayTransactions->nextPageUrl() }}" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+              </a>
+              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $todayTransactions->firstItem() }}-{{ $todayTransactions->lastItem() }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $todayTransactions->total() }}</span></span>
+          </div>
+          <div class="flex items-center space-x-3">
+              <a href="{{ $todayTransactions->Url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $todayTransactions->onFirstPage() ? 'cursor-not-allowed opacity-50' : '' }}">
+                  First
+              </a>
+              <a href="{{ $todayTransactions->previousPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                  «
+              </a>
+              @php
+                  $start = max($todayTransactions->currentPage() - 1, 1);
+                  $end = min($todayTransactions->currentPage() + 1, $todayTransactions->lastPage());
+              @endphp
+              <div class="flex items-center space-x-2">
+                  @if ($start > 1)
+                      <a href="{{ $todayTransactions->url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">1</a>
+                      @if ($start > 2)
+                          <div class="text-gray-500">...</div>
+                      @endif
+                  @endif
+                  @for ($i = $start; $i <= $end; $i++)
+                      <a href="{{ $todayTransactions->url($i) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $todayTransactions->currentPage() == $i ? 'bg-primary-800' : '' }}">{{ $i }}</a>
+                  @endfor
+                  @if ($end < $todayTransactions->lastPage())
+                      @if ($end < $todayTransactions->lastPage() - 1)
+                          <div class="text-gray-500">...</div>
+                      @endif
+                      <a href="{{ $todayTransactions->url($todayTransactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{{ $todayTransactions->lastPage() }}</a>
+                  @endif
+              </div>
+              <a href="{{ $todayTransactions->nextPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                  »
+              </a>
+              <a href="{{ $todayTransactions->url($todayTransactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $todayTransactions->currentPage() == $todayTransactions->lastPage() ? 'cursor-not-allowed opacity-50' : '' }}">
+                  Last
+              </a>
+            </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex items-center mb-4 sm:mb-0">
-        <a href="{{ $transactions->previousPageUrl() }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-        </a>
-        <a href="{{ $transactions->nextPageUrl() }}" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-        </a>
-        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $transactions->firstItem() }}-{{ $transactions->lastItem() }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $transactions->total() }}</span></span>
-    </div>
-    <div class="flex items-center space-x-3">
-        <a href="{{ $transactions->Url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $transactions->onFirstPage() ? 'cursor-not-allowed opacity-50' : '' }}">
-            First
-        </a>
-        <a href="{{ $transactions->previousPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-            «
-        </a>
-        @php
-            $start = max($transactions->currentPage() - 1, 1);
-            $end = min($transactions->currentPage() + 1, $transactions->lastPage());
-        @endphp
-        <div class="flex items-center space-x-2">
-            @if ($start > 1)
-                <a href="{{ $transactions->url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">1</a>
-                @if ($start > 2)
-                    <div class="text-gray-500">...</div>
-                @endif
-            @endif
-            @for ($i = $start; $i <= $end; $i++)
-                <a href="{{ $transactions->url($i) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $transactions->currentPage() == $i ? 'bg-primary-800' : '' }}">{{ $i }}</a>
-            @endfor
-            @if ($end < $transactions->lastPage())
-                @if ($end < $transactions->lastPage() - 1)
-                    <div class="text-gray-500">...</div>
-                @endif
-                <a href="{{ $transactions->url($transactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{{ $transactions->lastPage() }}</a>
-            @endif
-        </div>
-        <a href="{{ $transactions->nextPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-            »
-        </a>
-        <a href="{{ $transactions->url($transactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $transactions->currentPage() == $transactions->lastPage() ? 'cursor-not-allowed opacity-50' : '' }}">
-            Last
-        </a>
-       </div>
-        </div>
-      </div>
-
-      <!--Table Manager Gudang Transasi Hari Ini-->
-  @endif
+    <!-- Pagination -->
+  <!--Table Manager Gudang Transasi Hari Ini-->
+@endif
 
   <!-- Total User, Transaksi Masuk, dan Transaksi Keluar -->
     @if (auth()->user()->role->name == 'Admin')
@@ -168,7 +169,7 @@
           </div>
       </div>
     @endif
-      <!-- Total User, Transaksi Masuk, dan Transaksi Keluar -->
+  <!-- Total User, Transaksi Masuk, dan Transaksi Keluar -->
 
 <!-- Grafik -->
       @if (auth()->user()->role->name == 'Admin')
@@ -248,7 +249,7 @@
 <!-- Filter Tanggal -->
       
 
-      <!-- Table Admin -->
+<!-- Table Admin -->
   @if (auth()->user()->role->name === 'Admin')
       <div class="flex flex-col mt-6 mx-4">
         <div class="overflow-x-auto rounded-lg mx-4">
@@ -281,7 +282,7 @@
                   </tr>
                 </thead>
                 <tbody class="bg-white dark:bg-gray-800">
-                @foreach($transactions->whereIn('status', ['Diterima', 'Dikeluarkan']) as $transaction)
+                @foreach($transactions as $transaction)
                   <tr>
                     <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
                       {{$transaction->product_name}} 
@@ -318,292 +319,296 @@
           </div>
         </div>
       </div>
-      <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex items-center mb-4 sm:mb-0">
-        <a href="{{ $transactions->previousPageUrl() }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-        </a>
-        <a href="{{ $transactions->nextPageUrl() }}" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-        </a>
-        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $transactions->firstItem() }}-{{ $transactions->lastItem() }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $transactions->total() }}</span></span>
-    </div>
-    <div class="flex items-center space-x-3">
-        <a href="{{ $transactions->Url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $transactions->onFirstPage() ? 'cursor-not-allowed opacity-50' : '' }}">
-            First
-        </a>
-        <a href="{{ $transactions->previousPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-            «
-        </a>
-        @php
-            $start = max($transactions->currentPage() - 1, 1);
-            $end = min($transactions->currentPage() + 1, $transactions->lastPage());
-        @endphp
-        <div class="flex items-center space-x-2">
-            @if ($start > 1)
-                <a href="{{ $transactions->url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">1</a>
-                @if ($start > 2)
-                    <div class="text-gray-500">...</div>
-                @endif
-            @endif
-            @for ($i = $start; $i <= $end; $i++)
-                <a href="{{ $transactions->url($i) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $transactions->currentPage() == $i ? 'bg-primary-800' : '' }}">{{ $i }}</a>
-            @endfor
-            @if ($end < $transactions->lastPage())
-                @if ($end < $transactions->lastPage() - 1)
-                    <div class="text-gray-500">...</div>
-                @endif
-                <a href="{{ $transactions->url($transactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{{ $transactions->lastPage() }}</a>
-            @endif
+  <!-- Pagination -->
+        <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex items-center mb-4 sm:mb-0">
+            <a href="{{ $filteredTransactions->previousPageUrl() }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            </a>
+            <a href="{{ $filteredTransactions->nextPageUrl() }}" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+            </a>
+            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $filteredTransactions->firstItem() }}-{{ $filteredTransactions->lastItem() }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $filteredTransactions->total() }}</span></span>
         </div>
-        <a href="{{ $transactions->nextPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-            »
-        </a>
-        <a href="{{ $transactions->url($transactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $transactions->currentPage() == $transactions->lastPage() ? 'cursor-not-allowed opacity-50' : '' }}">
-            Last
-        </a>
-       </div>
-        </div>
+        <div class="flex items-center space-x-3">
+            <a href="{{ $filteredTransactions->Url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $filteredTransactions->onFirstPage() ? 'cursor-not-allowed opacity-50' : '' }}">
+                First
+            </a>
+            <a href="{{ $filteredTransactions->previousPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                «
+            </a>
+            @php
+                $start = max($filteredTransactions->currentPage() - 1, 1);
+                $end = min($filteredTransactions->currentPage() + 1, $filteredTransactions->lastPage());
+            @endphp
+            <div class="flex items-center space-x-2">
+                @if ($start > 1)
+                    <a href="{{ $filteredTransactions->url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">1</a>
+                    @if ($start > 2)
+                        <div class="text-gray-500">...</div>
+                    @endif
+                @endif
+                @for ($i = $start; $i <= $end; $i++)
+                    <a href="{{ $filteredTransactions->url($i) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $filteredTransactions->currentPage() == $i ? 'bg-primary-800' : '' }}">{{ $i }}</a>
+                @endfor
+                @if ($end < $filteredTransactions->lastPage())
+                    @if ($end < $filteredTransactions->lastPage() - 1)
+                        <div class="text-gray-500">...</div>
+                    @endif
+                    <a href="{{ $filteredTransactions->url($filteredTransactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{{ $filteredTransactions->lastPage() }}</a>
+                @endif
+            </div>
+            <a href="{{ $filteredTransactions->nextPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                »
+            </a>
+            <a href="{{ $filteredTransactions->url($filteredTransactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $filteredTransactions->currentPage() == $filteredTransactions->lastPage() ? 'cursor-not-allowed opacity-50' : '' }}">
+                Last
+            </a>
+          </div>
+            </div>
+  <!-- Pagination   -->
   @endif
-       <!-- Table Admin -->
-      
-      <!-- Table Manager Stock Menipis-->
-     @if (auth()->user()->role->name === 'Manager Gudang')
-            <div class="flex flex-col mt-6 mx-4">
-              <div class="overflow-x-auto rounded-lg mx-4">
-                <div class="inline-block min-w-full align-middle">
-                  <div class="overflow-hidden shadow sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                      <thead class="bg-gray-50 dark:bg-gray-700">
-                        <tr>
+<!-- Table Admin -->
+        
+<!-- Table Manager Stock Menipis-->
+      @if (auth()->user()->role->name === 'Manager Gudang')
+              <div class="flex flex-col mt-6 mx-4">
+                <div class="overflow-x-auto rounded-lg mx-4">
+                  <div class="inline-block min-w-full align-middle">
+                    <div class="overflow-hidden shadow sm:rounded-lg">
+                      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                          <tr>
 
-                        <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                            Image
-                          </th>
                           <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                            SKU
-                          </th>
-                          <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                            Product Name
-                          </th>
-                          <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                            Category
-                          </th>
-                          <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                            Current Stock
-                          </th>
-                          <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                            Status
-                          </th>
-                        </tr>
-                      </thead>
-                  <tbody class="bg-white dark:bg-gray-800">
-                  @foreach($stockOpname as $opname)
-                  @if($opname['stock_akhir'] < $opname->product->stock_min) <!-- Stock Minimum -->
-                  <tr>
-                    <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
-                      @if($opname->product->image)
-                          <img src="{{ asset('storage/' . $opname->product->image) }}" alt="{{ $opname->product->name }}" class="w-16 h-16 object-cover rounded-lg">
-                      @else
-                          <span>No Image</span>
+                              Image
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              SKU
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Product Name
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Category
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Current Stock
+                            </th>
+                            <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                              Status
+                            </th>
+                          </tr>
+                        </thead>
+                    <tbody class="bg-white dark:bg-gray-800">
+                    @foreach($stockOpname as $opname)
+                    @if($opname['stock_akhir'] < $opname->product->stock_min) <!-- Stock Minimum -->
+                    <tr>
+                      <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                        @if($opname->product->image)
+                            <img src="{{ asset('storage/' . $opname->product->image) }}" alt="{{ $opname->product->name }}" class="w-16 h-16 object-cover rounded-lg">
+                        @else
+                            <span>No Image</span>
+                        @endif
+                      </td>
+                      <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $opname->product->sku }}
+                      </td>
+                      <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ $opname->category->name }}
+                      </td>
+                      <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ $opname->product->name }}
+                      </td>
+                      <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ $opname['stock_akhir']}}
+                      </td>
+                      
+                      <td class="p-4 whitespace-nowrap">
+                        @if($opname['stock_akhir'] === 0)
+                          <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-red-100 dark:bg-gray-700 dark:border-red-500 dark:text-red-400">Stock Habis</span>
+                        @elseif($opname['stock_akhir'] < $opname->product->stock_min)
+                          <span class="bg-orange-100 text-orange-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-orange-100 dark:bg-gray-700 dark:border-orange-300 dark:text-orange-300">Stock Menipis</span>
+                        @else
+                          <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-green-100 dark:bg-gray-700 dark:border-green-500 dark:text-green-400">Stock Aman</span>
+                        @endif
+                      </td>
+                    </tr>
+                    @endif
+                    @endforeach
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+  <!-- Pagination  -->
+          <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
+          <div class="flex items-center mb-4 sm:mb-0">
+              <a href="{{ $lowAndEmptyStock->previousPageUrl() }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+              </a>
+              <a href="{{ $lowAndEmptyStock->nextPageUrl() }}" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                  <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+              </a>
+              <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $lowAndEmptyStock->firstItem() }}-{{ $lowAndEmptyStock->lastItem() }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $lowAndEmptyStock->total() }}</span></span>
+          </div>
+          <div class="flex items-center space-x-3">
+              <a href="{{ $lowAndEmptyStock->Url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $lowAndEmptyStock->onFirstPage() ? 'cursor-not-allowed opacity-50' : '' }}">
+                  First
+              </a>
+              <a href="{{ $lowAndEmptyStock->previousPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                  «
+              </a>
+              @php
+                  $start = max($lowAndEmptyStock->currentPage() - 1, 1);
+                  $end = min($lowAndEmptyStock->currentPage() + 1, $lowAndEmptyStock->lastPage());
+              @endphp
+              <div class="flex items-center space-x-2">
+                  @if ($start > 1)
+                      <a href="{{ $lowAndEmptyStock->url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">1</a>
+                      @if ($start > 2)
+                          <div class="text-gray-500">...</div>
                       @endif
-                    </td>
-                    <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
-                      {{ $opname->product->sku }}
-                    </td>
-                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      {{ $opname->category->name }}
-                    </td>
-                    <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                      {{ $opname->product->name }}
-                    </td>
-                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      {{ $opname['stock_akhir']}}
-                    </td>
-                    
-                    <td class="p-4 whitespace-nowrap">
-                      @if($opname['stock_akhir'] === 0)
-                        <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-red-100 dark:bg-gray-700 dark:border-red-500 dark:text-red-400">Stock Habis</span>
-                      @elseif($opname['stock_akhir'] < $opname->product->stock_min)
-                        <span class="bg-orange-100 text-orange-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-orange-100 dark:bg-gray-700 dark:border-orange-300 dark:text-orange-300">Stock Menipis</span>
-                      @else
-                        <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md border border-green-100 dark:bg-gray-700 dark:border-green-500 dark:text-green-400">Stock Aman</span>
-                      @endif
-                    </td>
-                  </tr>
                   @endif
-                  @endforeach
+                  @for ($i = $start; $i <= $end; $i++)
+                      <a href="{{ $lowAndEmptyStock->url($i) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $lowAndEmptyStock->currentPage() == $i ? 'bg-primary-800' : '' }}">{{ $i }}</a>
+                  @endfor
+                  @if ($end < $lowAndEmptyStock->lastPage())
+                      @if ($end < $lowAndEmptyStock->lastPage() - 1)
+                          <div class="text-gray-500">...</div>
+                      @endif
+                      <a href="{{ $lowAndEmptyStock->url($lowAndEmptyStock->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{{ $lowAndEmptyStock->lastPage() }}</a>
+                  @endif
+              </div>
+              <a href="{{ $lowAndEmptyStock->nextPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                  »
+              </a>
+              <a href="{{ $lowAndEmptyStock->url($lowAndEmptyStock->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $lowAndEmptyStock->currentPage() == $lowAndEmptyStock->lastPage() ? 'cursor-not-allowed opacity-50' : '' }}">
+                  Last
+              </a>
+          </div>
+        </div>
+      @endif
+  <!-- Pagination     -->
+<!-- Table Manager Stock Menipis-->
+
+<!-- Tabel Staff Gudang Pending Transaksi-->
+    @if (auth()->user()->role->name === 'Staff Gudang')
+        <div class="flex flex-col mt-6 mx-4">
+          <div class="overflow-x-auto rounded-lg mx-4">
+            <div class="inline-block min-w-full align-middle">
+              <div class="overflow-hidden shadow sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                  <thead class="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                        Product Name
+                      </th>
+                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                        Category
+                      </th>
+                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                        Quantity
+                      </th>
+                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                        Current Stock
+                      </th>
+                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                        Time
+                      </th>
+                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                        Date
+                      </th>
+                      <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white dark:bg-gray-800">
+                  @foreach($allTransactions->where('status', 'Pending') as $transaction)
+                    <tr>
+                      <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                        {{$transaction->product_name}} 
+                      </td>
+                      <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                        {{$transaction->category_name}}
+                      </td>
+                      <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        @if($transaction->type == 'Masuk')
+                          + {{$transaction->quantity}}
+                        @else
+                          - {{$transaction->quantity}}
+                        @endif
+                      </td>
+                      <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                        {{$transaction->stock_sementara}}</td>
+                      <td class="p-4 text-sm font-normal text-left text-gray-500 dark:text-gray-400 transaction-date transaction-time">{{ \Carbon\Carbon::parse($transaction->updated_at)->setTimezone('Asia/Jakarta')->format('H:i:s') ?? 'Waktu Tidak Ditemukan' }}</td>
+                      <td class="p-4 text-sm font-normal text-left text-gray-500 dark:text-gray-400 transaction-date transaction-date">{{ \Carbon\Carbon::parse($transaction->updated_at)->setTimezone('Asia/Jakarta')->format('Y-m-d') ?? 'Tanggal Tidak Ditemukan' }}</td>
+                      <td class="p-4 whitespace-nowrap">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-purple-400 border border-purple-100 dark:border-purple-500">
+                          {{$transaction->status}}
+                        </span>
+                      </td>
+                    </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
-        <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
+  <!-- Pagination -->
+  <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
         <div class="flex items-center mb-4 sm:mb-0">
-            <a href="{{ $stockOpname->previousPageUrl() }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            </a>
-            <a href="{{ $stockOpname->nextPageUrl() }}" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-            </a>
-            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $stockOpname->firstItem() }}-{{ $stockOpname->lastItem() }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $stockOpname->total() }}</span></span>
-        </div>
-        <div class="flex items-center space-x-3">
-            <a href="{{ $stockOpname->Url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $stockOpname->onFirstPage() ? 'cursor-not-allowed opacity-50' : '' }}">
-                First
-            </a>
-            <a href="{{ $stockOpname->previousPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                «
-            </a>
-            @php
-                $start = max($stockOpname->currentPage() - 1, 1);
-                $end = min($stockOpname->currentPage() + 1, $stockOpname->lastPage());
-            @endphp
-            <div class="flex items-center space-x-2">
-                @if ($start > 1)
-                    <a href="{{ $stockOpname->url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">1</a>
-                    @if ($start > 2)
-                        <div class="text-gray-500">...</div>
-                    @endif
-                @endif
-                @for ($i = $start; $i <= $end; $i++)
-                    <a href="{{ $stockOpname->url($i) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $stockOpname->currentPage() == $i ? 'bg-primary-800' : '' }}">{{ $i }}</a>
-                @endfor
-                @if ($end < $stockOpname->lastPage())
-                    @if ($end < $stockOpname->lastPage() - 1)
-                        <div class="text-gray-500">...</div>
-                    @endif
-                    <a href="{{ $stockOpname->url($stockOpname->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{{ $stockOpname->lastPage() }}</a>
-                @endif
-            </div>
-            <a href="{{ $stockOpname->nextPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                »
-            </a>
-            <a href="{{ $stockOpname->url($stockOpname->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $stockOpname->currentPage() == $stockOpname->lastPage() ? 'cursor-not-allowed opacity-50' : '' }}">
-                Last
-            </a>
-        </div>
+          <a href="{{ $todayPendingTransactions->previousPageUrl() }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+          </a>
+          <a href="{{ $todayPendingTransactions->nextPageUrl() }}" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+              <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
+          </a>
+          <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $todayPendingTransactions->firstItem() }}-{{ $todayPendingTransactions->lastItem() }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $todayPendingTransactions->total() }}</span></span>
       </div>
-     @endif
-      <!-- Table Manager Stock Menipis-->
-
-      <!-- Tabel Staff Gudang Pending Transaksi-->
-  @if (auth()->user()->role->name === 'Staff Gudang')
-      <div class="flex flex-col mt-6 mx-4">
-        <div class="overflow-x-auto rounded-lg mx-4">
-          <div class="inline-block min-w-full align-middle">
-            <div class="overflow-hidden shadow sm:rounded-lg">
-              <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                <thead class="bg-gray-50 dark:bg-gray-700">
-                  <tr>
-                    <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                      Product Name
-                    </th>
-                    <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                       Category
-                    </th>
-                    <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                      Quantity
-                    </th>
-                    <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                      Current Stock
-                    </th>
-                    <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                      Time
-                    </th>
-                    <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                      Date
-                    </th>
-                    <th scope="col" class="p-4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
-                      Status
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white dark:bg-gray-800">
-                @foreach($allTransactions->where('status', 'Pending') as $transaction)
-                  <tr>
-                    <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                      {{$transaction->product_name}} 
-                    </td>
-                    <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
-                      {{$transaction->category_name}}
-                    </td>
-                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                      @if($transaction->type == 'Masuk')
-                        + {{$transaction->quantity}}
-                      @else
-                        - {{$transaction->quantity}}
-                      @endif
-                    </td>
-                    <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
-                      {{$transaction->stock_sementara}}</td>
-                    <td class="p-4 text-sm font-normal text-left text-gray-500 dark:text-gray-400 transaction-date transaction-time">{{ \Carbon\Carbon::parse($transaction->updated_at)->setTimezone('Asia/Jakarta')->format('H:i:s') ?? 'Waktu Tidak Ditemukan' }}</td>
-                    <td class="p-4 text-sm font-normal text-left text-gray-500 dark:text-gray-400 transaction-date transaction-date">{{ \Carbon\Carbon::parse($transaction->updated_at)->setTimezone('Asia/Jakarta')->format('Y-m-d') ?? 'Tanggal Tidak Ditemukan' }}</td>
-                    <td class="p-4 whitespace-nowrap">
-                      <span class="bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-md dark:bg-gray-700 dark:text-purple-400 border border-purple-100 dark:border-purple-500">
-                        {{$transaction->status}}
-                      </span>
-                    </td>
-                  </tr>
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
+      <div class="flex items-center space-x-3">
+          <a href="{{ $todayPendingTransactions->Url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $todayPendingTransactions->onFirstPage() ? 'cursor-not-allowed opacity-50' : '' }}">
+              First
+          </a>
+          <a href="{{ $todayPendingTransactions->previousPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              «
+          </a>
+          @php
+              $start = max($todayPendingTransactions->currentPage() - 1, 1);
+              $end = min($todayPendingTransactions->currentPage() + 1, $todayPendingTransactions->lastPage());
+          @endphp
+          <div class="flex items-center space-x-2">
+              @if ($start > 1)
+                  <a href="{{ $todayPendingTransactions->url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">1</a>
+                  @if ($start > 2)
+                      <div class="text-gray-500">...</div>
+                  @endif
+              @endif
+              @for ($i = $start; $i <= $end; $i++)
+                  <a href="{{ $todayPendingTransactions->url($i) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $todayPendingTransactions->currentPage() == $i ? 'bg-primary-800' : '' }}">{{ $i }}</a>
+              @endfor
+              @if ($end < $todayPendingTransactions->lastPage())
+                  @if ($end < $todayPendingTransactions->lastPage() - 1)
+                      <div class="text-gray-500">...</div>
+                  @endif
+                  <a href="{{ $todayPendingTransactions->url($todayPendingTransactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{{ $todayPendingTransactions->lastPage() }}</a>
+              @endif
           </div>
+          <a href="{{ $todayPendingTransactions->nextPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              »
+          </a>
+          <a href="{{ $todayPendingTransactions->url($todayPendingTransactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $todayPendingTransactions->currentPage() == $todayPendingTransactions->lastPage() ? 'cursor-not-allowed opacity-50' : '' }}">
+              Last
+          </a>
         </div>
-      </div>
-      <!-- Pagination -->
-      <div class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-between dark:bg-gray-800 dark:border-gray-700">
-      <div class="flex items-center mb-4 sm:mb-0">
-        <a href="{{ $transactions->previousPageUrl() }}" class="inline-flex justify-center p-1 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-        </a>
-        <a href="{{ $transactions->nextPageUrl() }}" class="inline-flex justify-center p-1 mr-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-            <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
-        </a>
-        <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Showing <span class="font-semibold text-gray-900 dark:text-white">{{ $transactions->firstItem() }}-{{ $transactions->lastItem() }}</span> of <span class="font-semibold text-gray-900 dark:text-white">{{ $transactions->total() }}</span></span>
-    </div>
-    <div class="flex items-center space-x-3">
-        <a href="{{ $transactions->Url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $transactions->onFirstPage() ? 'cursor-not-allowed opacity-50' : '' }}">
-            First
-        </a>
-        <a href="{{ $transactions->previousPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-            «
-        </a>
-        @php
-            $start = max($transactions->currentPage() - 1, 1);
-            $end = min($transactions->currentPage() + 1, $transactions->lastPage());
-        @endphp
-        <div class="flex items-center space-x-2">
-            @if ($start > 1)
-                <a href="{{ $transactions->url(1) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">1</a>
-                @if ($start > 2)
-                    <div class="text-gray-500">...</div>
-                @endif
-            @endif
-            @for ($i = $start; $i <= $end; $i++)
-                <a href="{{ $transactions->url($i) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $transactions->currentPage() == $i ? 'bg-primary-800' : '' }}">{{ $i }}</a>
-            @endfor
-            @if ($end < $transactions->lastPage())
-                @if ($end < $transactions->lastPage() - 1)
-                    <div class="text-gray-500">...</div>
-                @endif
-                <a href="{{ $transactions->url($transactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{{ $transactions->lastPage() }}</a>
-            @endif
-        </div>
-        <a href="{{ $transactions->nextPageUrl() }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-            »
-        </a>
-        <a href="{{ $transactions->url($transactions->lastPage()) }}" class="inline-flex items-center justify-center flex-1 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 {{ $transactions->currentPage() == $transactions->lastPage() ? 'cursor-not-allowed opacity-50' : '' }}">
-            Last
-        </a>
-       </div>
-        </div>
-    @endif
-      <!-- Tabel Staff Gudang Pending Transaksi-->  
+          </div>
+      @endif
+  <!-- Pagination -->
+<!-- Tabel Staff Gudang Pending Transaksi-->  
 
-<!-- Pagination -->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>

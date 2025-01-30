@@ -34,7 +34,6 @@ class DashboardController extends Controller
                 'products.sku AS product_sku',
                 'users.name AS user_name',
                 'categories.name AS category_name',
-                 // Ambil nama user dari tabel users
                 DB::raw("
                     SUM(
                         CASE 
@@ -70,21 +69,51 @@ class DashboardController extends Controller
         $prod = Product::all();
         $category = Category::all();
         $stockOpname = StockOpname::paginate(10);
-        
-        $todayTransactions = $allTransactions->filter(function ($transaction) {
-            return \Carbon\Carbon::parse($transaction->created_at)->isToday() && 
+        // Data Transaksi Hari Ini
+        $dataToday = collect($allTransactions)->filter(function ($transaction) {
+            return Carbon::parse($transaction->updated_at)->isToday() && 
                    in_array($transaction->status, ['Dikeluarkan', 'Diterima']);
         });
-        
+        //  Pagination Transaksi Hari Ini Manager Gudang
+        $todayTransactions = Transaction::whereDate('created_at', Carbon::today())
+            ->whereIn('status', ['Dikeluarkan', 'Diterima'])
+            ->orderBy('updated_at', 'desc')
+            ->paginate(10);
+            
+        //  Pagination Transaksi Admin   
+        $filteredTransactions = Transaction::where(function($query) {
+            $query->where('status', 'Dikeluarkan')
+                  ->orWhere('status', 'Diterima');
+        })
+        ->orderBy('updated_at', 'desc')
+        ->paginate(10);
 
+        //  Pagination Pending Staff Gudang
+        $todayPendingTransactions = Transaction::whereDate('created_at', Carbon::today())
+            ->where('status', 'Pending')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(10);
 
-        
-    
+        //  Pagination Stok Menipis dan Habis   
+      $lowAndEmptyStock = StockOpname::join('products', 'stockOpname.product_id', '=', 'products.id')
+        ->where(function($query) {
+            $query->whereRaw('stockOpname.stock_akhir = 0')
+                  ->orWhereRaw('stockOpname.stock_akhir < products.stock_min');
+        })
+        ->with(['product', 'category'])
+        ->orderByRaw('CASE 
+            WHEN stockOpname.stock_akhir = 0 THEN 1
+            WHEN stockOpname.stock_akhir < products.stock_min THEN 2
+            ELSE 3 END')
+        ->orderBy('stockOpname.stock_akhir')
+        ->select('stockOpname.*')
+        ->paginate(10);
         // Return ke view
-    return view('dashboard.tampil', compact('transactions', 'prod', 'us', 'type', 'status', 'category', 'stockOpname','allTransactions','todayTransactions'));
+    return view('dashboard.tampil', compact('transactions', 'prod', 'us', 'type', 'status', 'category', 'stockOpname','allTransactions','todayTransactions','filteredTransactions','todayPendingTransactions','dataToday','lowAndEmptyStock'));
 
         }
-}
+    }
+
 
 
 

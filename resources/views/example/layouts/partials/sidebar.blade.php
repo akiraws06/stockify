@@ -61,15 +61,17 @@
                   Produk
                 </a>
               </li>
+              @endif
+              @if (Auth::user()->role->name == 'Admin')
               <li>
                 <a href="{{ url('/product/category') }}" class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700
                 {{ Request::is('example/crud/users') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
                 Kategori
               </a>
               </li>
+              @endif
             </ul>
           </li>
-          @endif
           <!-- Product -->
 
           <!-- Supplier -->
@@ -159,7 +161,7 @@
             <li>
               <a href="{{ url('/laporan/stock') }}" class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700
                 {{ Request::is('laporan/stock') ? 'bg-gray-200 dark:bg-gray-700' : '' }}">
-                Stok Produk
+                Semua Transaksi
               </a>
             </li>
 
